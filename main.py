@@ -24,6 +24,8 @@ def main() -> None:
     text = REPLY
     assert 1 <= len(text) <= 159, f"reply is {len(text)} chars, must be 1-159"
     assert text.strip() == text and text, "reply must not be only whitespace"
+    # The gate reads one line: refuse a reply with a line break inside it.
+    assert "\n" not in text, "reply must be a single line"
     with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as f:
         f.write(text)
 
